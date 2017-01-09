@@ -1,30 +1,32 @@
 <template>
   <div id="app">
     <h1>{{ title }}</h1>
-    <Nav :pages="pages"/>
+    <Navbar :pages="pages"/>
     <Businesses :businesses="businesses"/>
-    <Nav :pages="pages"/>
+    <Navbar :pages="pages"/>
   </div>
 </template>
 
 <script>
-import Nav from './components/Nav'
+import { mapGetters } from 'vuex'
+import Navbar from './components/Navbar'
 import Businesses from './components/Businesses'
-import * as data from './assets/businesses'
 
 export default {
   name: 'app',
   data() {
     return {
-      title: 'Businesses',
-      businesses: data.businesses,
-      pages: data.pages
+      title: 'Businesses'
     }
   },
   components: {
     Businesses,
-    Nav
-  }
+    Navbar
+  },
+  computed: mapGetters({
+    businesses: 'getBusinesses',
+    pages: 'getPages'
+  })
 }
 </script>
 
@@ -35,6 +37,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

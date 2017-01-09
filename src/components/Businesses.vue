@@ -2,7 +2,7 @@
   <div class="businesses">
     <ul>
       <li v-for="business in businesses" track-by="id">
-        <Link :id="business.id" :content="business.name">
+        <LinkTo :id="business.id" :content="business.name">
       </li>
     </ul>
   </div>
@@ -10,12 +10,12 @@
 
 <script>
 import Vue from 'vue'
-import Link from './Link'
+import LinkTo from './LinkTo'
 
 export default Vue.component('Businesses', {
   props: ['businesses'],
   components: {
-    Link
+    LinkTo
   }
 })
 </script>
