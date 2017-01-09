@@ -1,16 +1,29 @@
 <template>
   <div id="app">
-    <businesses></businesses>
+    <h1>{{ title }}</h1>
+    <Nav :pages="pages"/>
+    <Businesses :businesses="businesses"/>
+    <Nav :pages="pages"/>
   </div>
 </template>
 
 <script>
+import Nav from './components/Nav'
 import Businesses from './components/Businesses'
+import * as data from './assets/businesses'
 
 export default {
   name: 'app',
+  data() {
+    return {
+      title: 'Businesses',
+      businesses: data.businesses,
+      pages: data.pages
+    }
+  },
   components: {
-    Businesses
+    Businesses,
+    Nav
   }
 }
 </script>

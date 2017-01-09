@@ -1,29 +1,23 @@
 <template>
   <div class="businesses">
-    <h1>{{ msg }}</h1>
     <ul>
-      <li v-for="business in businesses" track-by="id">{{business.name}}</li>
-    </ul>
-
-    <ul>
-      <li v-for="page in pages">{{page}}</li>
+      <li v-for="business in businesses" track-by="id">
+        <Link :id="business.id" :content="business.name">
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
-import * as data from '../assets/businesses'
+import Vue from 'vue'
+import Link from './Link'
 
-export default {
-  name: 'hello',
-  data () {
-    return {
-      msg: 'Businesses',
-      businesses: data.businesses,
-      pages: data.pages
-    }
+export default Vue.component('Businesses', {
+  props: ['businesses'],
+  components: {
+    Link
   }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

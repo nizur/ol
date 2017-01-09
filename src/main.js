@@ -3,8 +3,6 @@
 import Vue from 'vue'
 import App from './App'
 
-// const olApiUrl = 'http://ec2-54-84-251-148.compute-1.amazonaws.com/businesses'
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
