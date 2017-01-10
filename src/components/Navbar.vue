@@ -1,9 +1,9 @@
 <template>
   <ul id="navigation">
-    <li v-if="pages.first"><LinkTo :url="pages.first" content="First"></li>
-    <li v-if="pages.prev"><LinkTo :url="pages.prev" content="Prev"></li>
-    <li v-if="pages.next"><LinkTo :url="pages.next" content="Next"></li>
-    <li v-if="pages.last"><LinkTo :url="pages.last" content="Last"></li>
+    <li><LinkTo v-if="pages.first" :url="pages.first" className="first" content="First"></li>
+    <li><LinkTo v-if="pages.prev" :url="pages.prev" className="prev" content="Prev"></li>
+    <li><LinkTo v-if="pages.next" :url="pages.next" className="next" content="Next"></li>
+    <li><LinkTo v-if="pages.last" :url="pages.last" className="last" content="Last"></li>
   </ul>
 </template>
 
@@ -11,7 +11,7 @@
 import Vue from 'vue'
 import LinkTo from './LinkTo'
 
-export default Vue.component('Nav', {
+export default Vue.component('NavBar', {
   props: ['pages'],
   components: {
     LinkTo
@@ -19,13 +19,17 @@ export default Vue.component('Nav', {
 })
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 ul {
+  display: flex;
+  justify-content: center;
   padding: 0;
+
+  li {
+    list-style: none;
+    margin: 0 1rem;
+    width: 10rem;
+  }
 }
 
-li {
-  display: inline;
-  list-style: none;
-}
 </style>

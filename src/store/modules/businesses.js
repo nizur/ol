@@ -1,15 +1,39 @@
-import * as data from '../../assets/businesses'
+import { http } from 'vue'
+
+const initialState = {
+  businesses: [],
+  pages: []
+}
+
+const logError = (error) => {
+  console.error(error)
+}
+
+const actions = {
+  fetch ({ commit }, payload) {
+    return http.get(payload.url)
+      .then(
+        (response) => commit(payload.action, JSON.parse(response.body)),
+        logError
+      )
+  }
+}
 
 const mutations = {
-
+  'FETCH' (state, data) {
+    state.businesses = data.businesses
+    state.pages = data.pages
+  }
 }
 
 const getters = {
-  getBusinesses: state => state
+  getBusinesses: state => state.businesses,
+  getPages: state => state.pages
 }
 
 export default {
-  state: {...data.businesses},
+  state: {...initialState},
+  actions,
   getters,
   mutations
 }
