@@ -1,37 +1,47 @@
 <template>
-  <div class="businesses">
+  <div class="container businesses">
+    <h2 class="title is-2 has-text-centered">{{ title }}</h2>
+    <navbar :pages="pages"/>
     <ul>
-      <li v-for="business in businesses" track-by="id">
-        <LinkTo :id="business.id" :content="business.name">
+      <li v-for="business in businesses">
+        <router-link :to="pathObject(business.id)" exact>{{business.name}}</router-link>
       </li>
     </ul>
+    <navbar :pages="pages"/>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import LinkTo from './LinkTo'
+import { mapGetters } from 'vuex'
+import Navbar from './Navbar'
 
 export default Vue.component('Businesses', {
-  props: ['businesses'],
   components: {
-    LinkTo
+    Navbar
+  },
+  data () {
+    return {
+      title: 'Businesses'
+    }
+  },
+  computed: mapGetters({
+    businesses: 'getBusinesses',
+    pages: 'getPages'
+  }),
+  methods: {
+    pathObject: function (id) {
+      return {
+        name: 'business',
+        params: {id}
+      }
+    }
+  },
+  created () {
+    this.$store.dispatch('fetch', {
+      action: 'FETCH',
+      url: 'businesses'
+    })
   }
 })
 </script>
-
-<style lang="scss" scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-
-  li {
-    margin: 0 10px;
-  }
-}
-
-</style>

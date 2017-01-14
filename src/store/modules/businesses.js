@@ -2,6 +2,7 @@ import { http } from 'vue'
 
 const initialState = {
   businesses: [],
+  business: {},
   pages: []
 }
 
@@ -23,12 +24,16 @@ const mutations = {
   'FETCH' (state, data) {
     state.businesses = data.businesses
     state.pages = data.pages
+  },
+  'FETCH_BUSINESS' (state, data) {
+    state.business = data
   }
 }
 
 const getters = {
   getBusinesses: state => state.businesses,
-  getPages: state => state.pages
+  getPages: state => state.pages,
+  getBusiness: state => state.business
 }
 
 export default {
